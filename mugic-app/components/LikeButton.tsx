@@ -40,7 +40,8 @@ const LikeButton: React.FC<LikeButtonProps> = ({
                 setIsLiked(true);
             }
         }
-    },[songId, supabaseClient, user?.id]);
+        fetchData();
+    },[songId, supabaseClient, user?.id, user]);
 
     const Icon = isLiked ? AiFillHeart : AiOutlineHeart;
 
@@ -82,10 +83,11 @@ const LikeButton: React.FC<LikeButtonProps> = ({
     <button 
     onClick={handleLike}
     className="
+        cursor-pointer
         hover:opacity-75
         transition
     ">
-        <Icon color={isLiked ? `#22c55e` : `white`} size={25}/>{}
+        <Icon color={isLiked ? `#b01e28` : `white`} size={25}/>{}
     </button>
   )
 }
