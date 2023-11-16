@@ -26,7 +26,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
     const [volume, setVolume] = useState(1)
     const [isPlaying, setIsPlaying] = useState(false);
 
-    const Icon = true ? BsPauseFill : BsPlayFill;
+    const Icon = isPlaying ? BsPauseFill : BsPlayFill;
     const VolumeIcon = volume === 0 ? HiSpeakerXMark : HiSpeakerWave 
 
     const onPlayNext = () =>{
@@ -142,9 +142,9 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
             cursor-pointer
             "
             >
-                <span className="text-black">
+                <svg className="text-black">
                    <Icon size={30}/> 
-                </span>
+                </svg>
             </div>
         </div>
 

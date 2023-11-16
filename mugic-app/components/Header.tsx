@@ -11,7 +11,9 @@ import useAuthModal from "@/hooks/useAuthModal";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import {useUser} from '@/hooks/useUser'
 import { FaUserAlt } from "react-icons/fa";
+import {TbCrown} from 'react-icons/tb'
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 interface HeaderProps extends IconBaseProps{
     children: React.ReactNode;
@@ -25,6 +27,7 @@ const Header:React.FC<HeaderProps> = ({
     children,
     className
 }) => {
+    const [isUpgraded, setIsUpgraded] = useState(false)
     const authModal = useAuthModal();
     const router = useRouter();
 
@@ -135,7 +138,20 @@ const Header:React.FC<HeaderProps> = ({
                 "
             >
                 {user?(
-                    <div className="flex gap-x-4 items-center">
+                    <div className="flex gap-x-4 items-center gap-4">
+                        {isUpgraded?
+                        <></>
+                        :
+                        <button 
+                        className="cursor-pointer flex hover:text-yellow-300 transition"
+                        onClick={()=>{}}
+                        >
+                            Upgrade
+                            <span>
+                                <TbCrown size={20}/>
+                            </span>
+                        </button>
+                        }
                         <Button
                             onClick={handleLogout}
                             className="bg-white px-6 py-2"

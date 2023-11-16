@@ -2,12 +2,14 @@ import getSongs from '@/action/getSong';
 import Header from '@/components/Header'
 import ListItem from '@/components/ListItem'
 import PageContent from '@/components/PageContent';
+import Albumcontent from '@/components/Albumcontent'
+import CategoryFilter from '@/components/CategoryFilter';
 
 export const revalidate = 0;
 
 export default async function Home() {
   const songs = await getSongs();
-
+  
   return (
     <div className="
       bg-neutral-900
@@ -43,6 +45,16 @@ export default async function Home() {
           </div>
         </div>
       </Header>
+      <div className='mt-2 mb-7 px-6'>
+        <div className='flex justify-between items-center'>
+          <h1 className='text-white text-2xl font-semibold'>
+            Category
+          </h1>
+        </div>
+        <div>
+          <CategoryFilter/>
+        </div>
+      </div>
       <div className='mt-2 mb-7 px-6'>
         <div className='flex justify-between items-center'>
           <h1 className='text-white text-2xl font-semibold'>

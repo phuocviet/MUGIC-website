@@ -2,17 +2,19 @@ import useUploadModal from "@/hooks/useUploadModal"
 import Modal from "./Modal"
 import uniqid from 'uniqid'
 import { FieldValues, useForm, SubmitHandler } from "react-hook-form";
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import Input from "./Input";
 import Button from "./Button";
 import toast from "react-hot-toast";
 import { useUser } from "@/hooks/useUser";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/navigation";
+import Select from "./Select";
 
 
 const UploadModal = () => {
     const [isLoading, setIsLoading] = useState(false)
+    const [category, setCategory] = useState("");
     const uploadModal = useUploadModal();
     const {user} = useUser();
     const supabaseClient = useSupabaseClient();
@@ -26,6 +28,7 @@ const UploadModal = () => {
         defaultValues:{
             author:'',
             title: '',
+            category_id: '',
             song: null,
             image: null,
         }
@@ -33,11 +36,12 @@ const UploadModal = () => {
 
     const onChange = (open:boolean) =>{
         if(!open){
-            // Reset the form
             reset();
             uploadModal.onClose();
         }
+        
     }
+    
     const onSubmit: SubmitHandler<FieldValues> = async (values) => {
         try {
           setIsLoading(true);
@@ -51,7 +55,8 @@ const UploadModal = () => {
           }
     
           const uniqueID = uniqid();
-    
+          console.log(values);
+          
           // Upload song
           const { 
             data: songData, 
@@ -92,12 +97,16 @@ const UploadModal = () => {
             .from('songs')
             .insert({
               user_id: user.id,
+              category_id: values.category_id,
               title: values.title,
               author: values.author,
               image_path: imageData.path,
               song_path: songData.path
             });
     
+
+          console.log(values);
+          
           if (supabaseError) {
             return toast.error(supabaseError.message);
           }
@@ -113,7 +122,7 @@ const UploadModal = () => {
           setIsLoading(false);
         }
     }
-
+    
   return (
     <Modal
         title="Add song"
@@ -139,6 +148,16 @@ const UploadModal = () => {
                 {...register('author',{required: true})}
                 placeholder='Song author'
             />
+            <div>
+                <div className="pb-1">
+                    Select song category
+                </div>
+                <Select
+                  id="category_id"
+                  disabled={isLoading}
+                  {...register('category_id',{required: true})}
+                />
+            </div>
             <div>
                 <div className="pb-1">
                     Select song file
