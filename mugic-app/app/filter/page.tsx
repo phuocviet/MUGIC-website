@@ -1,18 +1,21 @@
-import getLikedSongs from "@/action/getLikedSong";
+import getCategories from "@/action/getCategories";
+import getCategoryById from "@/action/getCategoryById";
+import getFilterSongs from "@/action/getFilterSong";
+import getSongs from "@/action/getSong";
+import CategoryTitle from "@/components/CategoryTitle";
+import FilteredSong from "@/components/FilteredContent";
 import Header from "@/components/Header";
-import LikedContent from "@/components/LikedContent";
-import Image from "next/image";
 import React from "react";
 
-interface FilteredProps{
-  id: Int16Array;
-}
+
 export const revalidate = 0;
 
-const Filtered:React.FC<FilteredProps> = async (
-  id
-) => {
-    const songs =(await getLikedSongs()).find(x => x.category_id == id);
+
+const Filter = async () => {
+  
+  const songs = await getSongs();
+  const category = await getCategories();
+  
   return (
     <div className="
     bg-neutral-900
@@ -31,21 +34,6 @@ const Filtered:React.FC<FilteredProps> = async (
           items-center
           gap-x-5
           ">
-            <div
-            className="
-            relative
-            h-32
-            w-32
-            lg:h-44
-            lg:w-44
-            ">
-              <Image
-              fill
-              src="/images/liked.png"
-              alt="PlayList"
-              className="object-cover"
-              />
-            </div>
             <div className="
             flex
             flex-col
@@ -56,24 +44,14 @@ const Filtered:React.FC<FilteredProps> = async (
               <p className="hidden md:block font-semibold text-sm">
                 PlayList
               </p>
-              <h1 
-              className="
-              text-white
-              text-4xl
-              sm:text-5xl
-              lg:text-7xl
-              font-bold
-              "
-              >
-                Liked Songs
-              </h1>
+              <CategoryTitle category={category}/>
             </div>
           </div>
         </div>
       </Header>
-      <LikedContent songs={songs}/>
+      <FilteredSong songs={songs}/>
     </div>
   )
 }
 
-export default Filtered
+export default Filter

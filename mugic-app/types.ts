@@ -13,6 +13,10 @@ export interface Category{
     id: string;
     title: string;
 }
+export interface Playlist{
+    id: string;
+    title: string;
+}
 export interface Song {
     id: string;
     user_id: string;

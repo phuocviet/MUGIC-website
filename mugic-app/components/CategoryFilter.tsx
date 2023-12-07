@@ -1,13 +1,28 @@
 "use client"
-
+import qs from 'query-string'
 import React from 'react'
 import CategoryCard from './CategoryCard'
 import useGetCategories from '@/hooks/useGetCategories';
+import { useRouter } from 'next/navigation';
+import { Category } from '@/types';
 
-const CategoryFilter = () => {
-  const {categories} = useGetCategories();
+interface CategoryFilterProps{
+  categories: Category[]
+}
 
+const CategoryFilter :React.FC<CategoryFilterProps> = ({
+  categories
+}) => {
   
+  const router = useRouter();
+  
+  const handleNavigate = (categoryId: string) => {
+    const url = qs.stringifyUrl({
+      url: `/Filter`,
+      query: {categoryId}
+    });
+    router.push(url);
+  }
   return (
     <div
       className='
@@ -27,7 +42,8 @@ const CategoryFilter = () => {
           categories?.map((c)=>(
               <CategoryCard 
                 key={c.id}
-                value={c.title}  
+                category={c}  
+                onClick={handleNavigate}
               />
           ))
       }

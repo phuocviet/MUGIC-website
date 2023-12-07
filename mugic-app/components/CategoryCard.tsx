@@ -1,29 +1,45 @@
 "use client"
 
-import { FC, ReactNode } from "react";
+import { FC } from "react";
+
+interface Category {
+  id: string;
+  title: string;
+}
 
 interface CategoryCardProps {
-  value: string
+  category: Category;
+  onClick: (categoryId: string) => void;
 }
-const CategoryCard:FC<CategoryCardProps> = (
-    value
-) => {    
-  const title = value;
+
+const CategoryCard:FC<CategoryCardProps> = ({
+    onClick,
+    category
+}) => {    
+  const handleClick = () => {
+    onClick(category.id)
+  }
   return (
     <div
     className="
-    w-[200px] 
-    h-[50px] 
-    hover:bg-neutral-800/50 
-    bg-neutral-800  
+    sm:w-[100px]
+    md:w-[100px]
+    lg:w-[150px]
+    xl:w-[150px] 
+    2xl:w-[180px]
+    h-[30px] 
+    hover:bg-blue-500 
+    bg-blue-500/50
+    transition
     rounded-md 
     flex 
     justify-center 
     items-center 
     cursor-pointer"
+    onClick={handleClick}
     >
-        <div className="">
-            <input type="submit" value={title.value}/>
+        <div>
+          <p className="text-white">{category.title}</p>
         </div>   
     </div>
   )
