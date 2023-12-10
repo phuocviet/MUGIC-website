@@ -2,9 +2,9 @@ import getCategories from "@/action/getCategories";
 import getCategoryById from "@/action/getCategoryById";
 import getFilterSongs from "@/action/getFilterSong";
 import getSongs from "@/action/getSong";
-import CategoryTitle from "@/components/CategoryTitle";
-import FilteredSong from "@/components/FilteredContent";
-import Header from "@/components/Header";
+import CategoryTitle from "@/components/Category/CategoryTitle";
+import FilteredSong from "@/components/Category/FilteredContent";
+import Header from "@/components/Shared/Header";
 import React from "react";
 
 

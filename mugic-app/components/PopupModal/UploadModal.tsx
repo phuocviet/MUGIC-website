@@ -1,15 +1,15 @@
 import useUploadModal from "@/hooks/useUploadModal"
-import Modal from "./Modal"
+import Modal from "../Shared/Modal"
 import uniqid from 'uniqid'
 import { FieldValues, useForm, SubmitHandler } from "react-hook-form";
 import { useState, ChangeEvent } from "react";
-import Input from "./Input";
-import Button from "./Button";
+import Input from "../SearchBar/Input";
+import Button from "../Shared/Button";
 import toast from "react-hot-toast";
 import { useUser } from "@/hooks/useUser";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/navigation";
-import Select from "./Select";
+import Select from "../Shared/Select";
 
 
 const UploadModal = () => {

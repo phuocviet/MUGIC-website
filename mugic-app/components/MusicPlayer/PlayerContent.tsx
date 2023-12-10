@@ -1,8 +1,8 @@
 "use client"
 
 import { Song } from "@/types"
-import MediaItem from "./MediaItem";
-import LikeButton from "./LikeButton";
+import MediaItem from "../Shared/MediaItem";
+import LikeButton from "../LikedPlaylist/LikeButton";
 import {BsPlayFill, BsPauseFill} from "react-icons/bs"
 import { AiFillStepBackward, AiFillStepForward } from "react-icons/ai";
 import {HiSpeakerXMark, HiSpeakerWave} from "react-icons/hi2"

@@ -6,7 +6,7 @@ import useAuthModal from '@/hooks/useAuthModal'
 import { useUser } from '@/hooks/useUser'
 import useUploadModal from '@/hooks/useUploadModal'
 import { Song } from '@/types'
-import MediaItem from './MediaItem'
+import MediaItem from '../Shared/MediaItem'
 import useOnPlay from '@/hooks/useOnPLay'
 
 interface LibraryProps{

@@ -4,18 +4,16 @@ import { useUser } from "@/hooks/useUser"
 import { Song } from "@/types"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
-import MediaItem from "./MediaItem"
-import LikeButton from "./LikeButton"
+import MediaItem from "../Shared/MediaItem"
+import LikeButton from "../LikedPlaylist/LikeButton"
 import useOnPlay from "@/hooks/useOnPLay"
 
-interface LikedContentProps{
-    songs: Song[]
+interface PlaylistcontentProps{
+  songs: Song[]
 }
 
-const LikedContent: React.FC<LikedContentProps> = ({
-    songs
-}) => {
-    const onPlay = useOnPlay(songs)
+ const PlayListContent:React.FC<PlaylistcontentProps> = ({songs}) => {
+  const onPlay = useOnPlay(songs)
     const router = useRouter();
     const {isLoading, user} = useUser();
 
@@ -57,5 +55,4 @@ const LikedContent: React.FC<LikedContentProps> = ({
 
   );
 }
-
-export default LikedContent;
+export default PlayListContent

@@ -1,16 +1,18 @@
 import getSongs from '@/action/getSong';
-import Header from '@/components/Header'
-import ListItem from '@/components/ListItem'
-import PageContent from '@/components/PageContent';
-import Albumcontent from '@/components/Albumcontent'
-import CategoryFilter from '@/components/CategoryFilter';
+import Header from '@/components/Shared/Header'
+import ListItem from '@/components/Shared/ListItem'
+import PageContent from '@/components/MainContents/PageContent';
+import PlayLists from '@/components/PlayList/PlayLists'
+import CategoryFilter from '@/components/Category/CategoryFilter';
 import getCategories from '@/action/getCategories';
+import getPlayLists from '@/action/getPlayList';
 
 export const revalidate = 0;
 
 export default async function Home() {
   const songs = await getSongs();
   const categories = await getCategories();
+  const playlists = await getPlayLists();
   return (
     <div className="
       bg-neutral-900
@@ -66,6 +68,9 @@ export default async function Home() {
           <h1 className='text-white text-2xl font-semibold'>
             PlayList
           </h1>
+        </div>
+        <div>
+          <PlayLists playlists={playlists}/>
         </div>
       </div>
     </div>

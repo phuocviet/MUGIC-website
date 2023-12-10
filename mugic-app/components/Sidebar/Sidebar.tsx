@@ -3,11 +3,11 @@
 import React from 'react'
 import { usePathname } from 'next/navigation';
 import {useMemo} from 'react'
-import Box from './Box';
+import Box from '../MainContents/Box';
 import SidebarItem from './SidebarItem';
 import {HiHome} from 'react-icons/hi'
 import {BiSearch} from 'react-icons/bi'
-import Library from './Library'
+import Library from '../MainContents/Library'
 import { Song } from '@/types';
 import { twMerge } from 'tailwind-merge';
 import usePlayer from '@/hooks/usePlayer';

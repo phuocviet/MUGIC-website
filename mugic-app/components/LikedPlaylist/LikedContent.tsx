@@ -4,28 +4,21 @@ import { useUser } from "@/hooks/useUser"
 import { Song } from "@/types"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
-import MediaItem from "./MediaItem"
+import MediaItem from "../Shared/MediaItem"
 import LikeButton from "./LikeButton"
 import useOnPlay from "@/hooks/useOnPLay"
-import { useSearchParams } from "next/navigation"
 
-interface FilteredSongProps{
+interface LikedContentProps{
     songs: Song[]
 }
 
-const FilteredSong: React.FC<FilteredSongProps> = ({
-    songs,
-
+const LikedContent: React.FC<LikedContentProps> = ({
+    songs
 }) => {
-    const param = useSearchParams();
-    const id: any = param.get('categoryId')
-    const filteredSongs = songs.filter(x => x.category_id == id) 
-
     const onPlay = useOnPlay(songs)
     const router = useRouter();
     const {isLoading, user} = useUser();
-    console.log(id);
-    
+
     useEffect(()=>{
         if(!isLoading && !user){
             router.replace('/')
@@ -42,14 +35,14 @@ const FilteredSong: React.FC<FilteredSongProps> = ({
             px-6
             text-neutral-400
             ">
-                No Filtered Songs
+                No Liked Songs
             </div>
         )
     }
 
   return (
     <div className="flex flex-col gap-y-2 w-full p-6">
-      {filteredSongs.map((song: any) => (
+      {songs.map((song: any) => (
         <div 
           key={song.id} 
           className="flex items-center gap-x-4 w-full"
@@ -65,4 +58,4 @@ const FilteredSong: React.FC<FilteredSongProps> = ({
   );
 }
 
-export default FilteredSong;
+export default LikedContent;
