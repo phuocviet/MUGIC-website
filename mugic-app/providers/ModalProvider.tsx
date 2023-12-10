@@ -1,8 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import AuthModal from "@/components/MainContents/AuthModal";
-import UploadModal from "@/components/PopupModal/UploadModal";
+import AuthModal from "@/components/PopupModal/AuthModal";
+import UploadSongModal from "@/components/PopupModal/UploadSongModal";
+import UploadPlayListModal from "@/components/PopupModal/UploadPlayListModal";
 
 const ModalProvider = () => {
     const [isMounted, setIsMounted] = useState(false)
@@ -18,7 +19,8 @@ const ModalProvider = () => {
   return (
     <>
       <AuthModal/>
-      <UploadModal/>
+      <UploadSongModal/>
+      <UploadPlayListModal/>
     </>
   )
 }

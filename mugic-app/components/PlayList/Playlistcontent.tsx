@@ -30,10 +30,10 @@ interface PlaylistcontentProps{
             flex-col
             gap-y-2
             w-full
-            px-6
+            justify-center
             text-neutral-400
             ">
-                No Liked Songs
+                No PlayList
             </div>
         )
     }

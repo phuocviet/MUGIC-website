@@ -2,7 +2,7 @@ import getSongs from '@/action/getSong';
 import Header from '@/components/Shared/Header'
 import ListItem from '@/components/Shared/ListItem'
 import PageContent from '@/components/MainContents/PageContent';
-import PlayLists from '@/components/PlayList/PlayLists'
+import PlayLists from '@/components/PlayList/PlayLists';
 import CategoryFilter from '@/components/Category/CategoryFilter';
 import getCategories from '@/action/getCategories';
 import getPlayLists from '@/action/getPlayList';

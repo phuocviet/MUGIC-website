@@ -12,9 +12,8 @@ import { useRouter } from "next/navigation";
 import Select from "../Shared/Select";
 
 
-const UploadModal = () => {
-    const [isLoading, setIsLoading] = useState(false)
-    const [category, setCategory] = useState("");
+const UploadSongModal = () => {
+    const [isLoading, setIsLoading] = useState(false);
     const uploadModal = useUploadModal();
     const {user} = useUser();
     const supabaseClient = useSupabaseClient();
@@ -133,7 +132,7 @@ const UploadModal = () => {
         <form
             onSubmit={handleSubmit(onSubmit)}
             className="
-                flex flex-col gap-y-4
+                flex flex-col gap-y-4 mb-10
             "
         >
             <Input
@@ -190,4 +189,4 @@ const UploadModal = () => {
   )
 }
 
-export default UploadModal
+export default UploadSongModal

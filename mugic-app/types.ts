@@ -15,7 +15,8 @@ export interface Category{
 }
 export interface Playlist{
     id: string;
-    title: string;
+    title: string;    
+    image_path: string;
 }
 export interface Song {
     id: string;
