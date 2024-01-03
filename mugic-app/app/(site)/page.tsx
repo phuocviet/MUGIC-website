@@ -6,6 +6,7 @@ import PlayLists from '@/components/PlayList/PlayLists';
 import CategoryFilter from '@/components/Category/CategoryFilter';
 import getCategories from '@/action/getCategories';
 import getPlayLists from '@/action/getPlayList';
+import PlaylistModal from '@/components/PopupModal/PlaylistModal';
 
 export const revalidate = 0;
 
@@ -48,7 +49,7 @@ export default async function Home() {
           </div>
         </div>
       </Header>
-      
+      {/* <PlaylistModal/> */}
       <div className='mt-2 mb-7 px-6'>
         
         <div>
@@ -57,9 +58,9 @@ export default async function Home() {
       </div>
       <div className='mt-2 mb-7 px-6'>
         <div className='flex justify-between items-center'>
-          <h1 className='text-white text-2xl font-semibold'>
+          {/* <h1 className='text-white text-2xl font-semibold'>
             Newest Songs
-          </h1>
+          </h1> */}
         </div>
         <div>
           <PageContent songs={songs}/>
@@ -73,6 +74,7 @@ export default async function Home() {
           <PlayLists playlists={playlists}/>
         </div>
       </div>
+      
     </div>
   )
 }

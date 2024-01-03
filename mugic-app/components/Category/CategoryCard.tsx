@@ -28,9 +28,7 @@ const CategoryCard:FC<CategoryCardProps> = ({
     xl:w-[150px] 
     2xl:w-[180px]
     h-[30px] 
-    hover:bg-sky-500 
-    bg-sky-500/50
-    transition
+    hover:bg-neutral-400/5 
     rounded-md 
     flex 
     justify-center 
@@ -39,7 +37,7 @@ const CategoryCard:FC<CategoryCardProps> = ({
     onClick={handleClick}
     >
         <div>
-          <p className="text-sky-200 semi-bold">{category.title}</p>
+          <p className="text-sky-200 hover:text-white transition semi-bold">{category.title}</p>
         </div>   
     </div>
   )

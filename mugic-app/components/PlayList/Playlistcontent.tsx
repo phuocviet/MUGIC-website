@@ -7,12 +7,13 @@ import { useEffect } from "react"
 import MediaItem from "../Shared/MediaItem"
 import LikeButton from "../LikedPlaylist/LikeButton"
 import useOnPlay from "@/hooks/useOnPLay"
+import DeleteButton from "../Shared/DeleteButton"
 
-interface PlaylistcontentProps{
+interface PlaylistContentProps{
   songs: Song[]
 }
 
- const PlayListContent:React.FC<PlaylistcontentProps> = ({songs}) => {
+ const PlayListContent:React.FC<PlaylistContentProps> = ({songs}) => {
   const onPlay = useOnPlay(songs)
     const router = useRouter();
     const {isLoading, user} = useUser();
@@ -49,6 +50,7 @@ interface PlaylistcontentProps{
             <MediaItem onClick={(id:string) => onPlay(id)} data={song} />
           </div>
           <LikeButton songId={song.id} />
+          <DeleteButton songId={song.id}/>
         </div>
       ))}
     </div>

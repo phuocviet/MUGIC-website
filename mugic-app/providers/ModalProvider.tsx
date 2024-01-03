@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import AuthModal from "@/components/PopupModal/AuthModal";
 import UploadSongModal from "@/components/PopupModal/UploadSongModal";
 import UploadPlayListModal from "@/components/PopupModal/UploadPlayListModal";
+import PlaylistModal from "@/components/PopupModal/PlaylistModal";
 
 const ModalProvider = () => {
     const [isMounted, setIsMounted] = useState(false)

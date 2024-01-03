@@ -17,15 +17,15 @@ const CategoryTitle:React.FC<CategoryTitleProps> = ({category}) => {
     
   return (
     <h1 
-              className="
-              text-white
-              text-4xl
-              sm:text-5xl
-              lg:text-7xl
-              font-bold
-              "
-              >
-              {categoryTitle[0].title} Songs
+      className="
+      text-white
+      text-4xl
+      sm:text-5xl
+      lg:text-7xl
+      font-bold
+      "
+      >
+      {categoryTitle[0].title} Songs
     </h1>
   )
 }

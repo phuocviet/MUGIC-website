@@ -11,7 +11,7 @@ const PlayButton = () => {
         flex 
         items-center 
         justify-center 
-        bg-sky-300 
+        bg-sky-800 
         p-4 
         drop-shadow-md 
         translate

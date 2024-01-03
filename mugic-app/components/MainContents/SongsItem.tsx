@@ -71,7 +71,7 @@ const SongItem: React.FC<SongItemProps> = ({
             </div>
             <div className="
                 absolute
-                bottom-24
+                bottom-40
                 right-25
             ">
                 <PlayButton/>

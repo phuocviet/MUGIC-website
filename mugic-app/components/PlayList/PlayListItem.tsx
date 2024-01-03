@@ -1,9 +1,15 @@
 "use client"
 
 import { Playlist } from "@/types";
+import { MdDelete } from "react-icons/md";
 import Image from "next/image";
 import PlayButton from "../MusicPlayer/PlayButton";
 import useLoadImagePlaylist from "@/hooks/useLoadImagePlaylist";
+import internal from "stream";
+import { supabase } from "@supabase/auth-ui-shared";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 interface PlaylistItemProps{
     data: Playlist;
@@ -15,10 +21,31 @@ const PlaylistItem: React.FC<PlaylistItemProps> = ({
     onClick
 }) => {
     const imagePath = useLoadImagePlaylist(data);
+    const supabase = useSupabaseClient();
+    const router = useRouter();
+    
+    const handleDelete = async (id: string) => {
+        try {
+            const {data, error} = await supabase
+            .from('playlist')
+            .delete()
+            .eq('id', id)
+            
+            if (error) {
+                toast.error("Failing delete");
+                console.error('Error deleting record:', error);
+            } else {
+                toast.success("Delete success");
+                router.refresh();
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
+        
+    }
 
   return (
     <div
-    onClick={()=>onClick(data.id)}
     className="
     relative 
     group 
@@ -52,13 +79,17 @@ const PlaylistItem: React.FC<PlaylistItemProps> = ({
                 alt="Image"
             />
         </div>
-        <div className="flex flex-col items-start w-full p-4 gap-y-1">
+        <div className="flex items-start w-full p-4 gap-y-1">
                 <p className="font-semibold text-white truncate w-full">
                     {data?.title}
                 </p>
-                
+                <button onClick={()=>handleDelete(data.id)} className="hover:text-red-600">
+                    <MdDelete size={25}/>{}
+                </button>
             </div>
-            <div className="
+            <div 
+            onClick={()=>onClick(data.id)}
+            className="
                 absolute
                 bottom-40
                 right-25

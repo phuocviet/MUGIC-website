@@ -3,13 +3,17 @@
 import { Song } from "@/types"
 import MediaItem from "../Shared/MediaItem";
 import LikeButton from "../LikedPlaylist/LikeButton";
-import {BsPlayFill, BsPauseFill} from "react-icons/bs"
+import {BsPlayFill, BsPauseFill, BsThreeDots} from "react-icons/bs"
 import { AiFillStepBackward, AiFillStepForward } from "react-icons/ai";
 import {HiSpeakerXMark, HiSpeakerWave} from "react-icons/hi2"
 import Slider from "./Slider";
 import usePlayer from "@/hooks/usePlayer";
 import { useEffect, useState } from "react";
 import useSound from "use-sound";
+import DropBox from "../Shared/DropBox";
+import SubBox from "../Shared/SubBox";
+import useGetPlaylist from "@/hooks/useGetPlaylist";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 
 interface PlayerContentProps{
@@ -25,9 +29,13 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
     const player = usePlayer();
     const [volume, setVolume] = useState(1)
     const [isPlaying, setIsPlaying] = useState(false);
+    const [isShowed, setIsShowed] = useState(false);
+    const [subIsShowed, setSubIsShowed] = useState(false);
+    const [items, setItems] = useState([{title:"", action: ""}]);
 
     const Icon = isPlaying ? BsPauseFill : BsPlayFill;
     const VolumeIcon = volume === 0 ? HiSpeakerXMark : HiSpeakerWave 
+    const {playlist, isError} = useGetPlaylist();
 
     const onPlayNext = () =>{
         if(player.ids.length === 0){
@@ -43,7 +51,28 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
 
         player.setId(nextSong)
     }
+    
+    const handleDropDown = async () =>{
+        // isShowed ? setIsShowed(false) : setIsShowed(true);
+        setIsShowed(!isShowed)
+        if(isShowed == true){
+            setSubIsShowed(false)
+        }
+        setItems([
+            {
+                title: "Add to playlist",
+                action: "addPlaylist"
+            },
+            {
+                title: "Block this song",
+                action: "block"
+            }
+        ]);
+    }
 
+    const onGetValue =() => {
+        setSubIsShowed(!subIsShowed)
+    }    
     const onPlayPrevious = () =>{
         if(player.ids.length === 0){
             return;
@@ -96,15 +125,23 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
         } 
     }
 
+
     return (
     <div
         className="
+        relative
         grid
         grid-cols-2
         md:grid-cols-3
         h-full
         "
     >
+        <button className="fixed bottom-[90px] left-[10rem] z-50">
+            <DropBox isShow={isShowed} items={items} onClick={onGetValue}/>{}
+        </button>
+        <button className="fixed bottom-[122px] left-[312px] z-50">
+            <SubBox isShow={subIsShowed} items={playlist} song={song}/>{}
+        </button>
         <div
             className="
             flex
@@ -115,6 +152,15 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
             <div className="flex items-center gap-x-4">
                 <MediaItem data={song}/>
                 <LikeButton songId={song.id}/>
+                <div onClick={handleDropDown}>
+                    <span 
+                        className="text-neutral-400
+                        cursor-pointer
+                        hover:text-white"
+                    >
+                        <BsThreeDots size={30}/>
+                    </span>
+            </div>
             </div>
         </div>
 
